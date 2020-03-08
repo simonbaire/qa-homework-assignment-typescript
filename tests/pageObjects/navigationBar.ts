@@ -9,7 +9,6 @@ class NavigationBar   {
         this.avatarImage.click();
         this.settingsLink.click();
     }
-
 }
 
 export default new NavigationBar();

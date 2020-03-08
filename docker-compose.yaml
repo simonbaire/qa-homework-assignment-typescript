@@ -1,0 +1,40 @@
+version: "3.5"
+
+networks:
+  selenoid:
+    driver: bridge
+    name: selenoid
+
+services:
+  selenoid:
+    command: ["-container-network", "selenoid", "-conf", "/etc/selenoid/browsers.json"]
+    container_name: selenoid
+    image: aerokube/selenoid:latest
+    networks:
+      - selenoid
+    ports:
+      - "4444:4444"
+    volumes:
+      - ./config/selenoid/browsers.json:/etc/selenoid/browsers.json
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  vidsy-browser-tests:
+    build: .
+    environment:
+      - VIDSY_EMAIL
+      - VIDSY_PASSWORD
+    image: vidsyhq/qa-homework-assignment-typescript:latest
+    networks:
+      - selenoid
+    volumes:
+      - ./:/vidsy
+      - /vidsy/node_modules
+
+  selenoid-ui:
+    command: ["--selenoid-uri", "http://selenoid:4444"]
+    image: "aerokube/selenoid-ui"
+    container_name: selenoid-ui
+    networks:
+      - selenoid
+    ports:
+      - "8080:8080"

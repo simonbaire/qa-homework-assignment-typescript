@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib":["dom", "es7"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "outDir": "src/",
+    "removeComments": true,
+    "strictNullChecks": false,
+    "target": "es2019",
+    "types": [
+      "@types/chai",
+      "@types/node",
+      "@wdio/mocha-framework",
+      "@wdio/sync"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "results",
+    "src"
+  ]
+}
